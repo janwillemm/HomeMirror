@@ -13,25 +13,10 @@ import java.util.Locale;
 public class DayModule {
 
     public static Spanned getDay() {
-        SimpleDateFormat formatDayOfMonth = new SimpleDateFormat("EEEE", Locale.US);
+        SimpleDateFormat formatDayOfMonth = new SimpleDateFormat("EEEE", new Locale("nl"));
         Calendar now = Calendar.getInstance();
         int dayOfMonth = now.get(Calendar.DAY_OF_MONTH);
-        return Html.fromHtml(formatDayOfMonth.format(now.getTime()) + " the " + dayOfMonth + "<sup><small>" + getDayOfMonthSuffix(dayOfMonth) + "</small></sup>");
+        return Html.fromHtml(formatDayOfMonth.format(now.getTime()) + " de " + dayOfMonth + "<sup><small>e</small></sup>");
     }
 
-    private static String getDayOfMonthSuffix(final int n) {
-        if (n >= 11 && n <= 13) {
-            return "th";
-        }
-        switch (n % 10) {
-            case 1:
-                return "st";
-            case 2:
-                return "nd";
-            case 3:
-                return "rd";
-            default:
-                return "th";
-        }
-    }
 }

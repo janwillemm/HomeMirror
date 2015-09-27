@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.BirthdayModule;
 import com.morristaedt.mirror.modules.CalendarModule;
-import com.morristaedt.mirror.modules.ChoresModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.MoodModule;
@@ -31,6 +30,7 @@ import com.morristaedt.mirror.utils.WeekUtil;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class MirrorActivity extends ActionBarActivity {
 
@@ -43,7 +43,6 @@ public class MirrorActivity extends ActionBarActivity {
     private TextView mDayText;
     private TextView mWeatherSummary;
     private TextView mHelloText;
-    private TextView mBikeTodayText;
     private TextView mStockText;
     private TextView mMoodText;
     private View mWaterPlants;
@@ -87,11 +86,6 @@ public class MirrorActivity extends ActionBarActivity {
             }
         }
 
-        @Override
-        public void onShouldBike(boolean showToday, boolean shouldBike) {
-            mBikeTodayText.setVisibility(showToday ? View.VISIBLE : View.GONE);
-            mBikeTodayText.setText(shouldBike ? R.string.bike_today : R.string.no_bike_today);
-        }
     };
 
     private NewsModule.NewsListener mNewsListener = new NewsModule.NewsListener() {
@@ -102,7 +96,6 @@ public class MirrorActivity extends ActionBarActivity {
             } else {
                 mNewsHeadline.setVisibility(View.VISIBLE);
                 mNewsHeadline.setText(headline);
-                mNewsHeadline.setSelected(true);
             }
         }
     };
@@ -163,10 +156,6 @@ public class MirrorActivity extends ActionBarActivity {
         mBirthdayText = (TextView) findViewById(R.id.birthday_text);
         mDayText = (TextView) findViewById(R.id.day_text);
         mWeatherSummary = (TextView) findViewById(R.id.weather_summary);
-        mHelloText = (TextView) findViewById(R.id.hello_text);
-        mWaterPlants = findViewById(R.id.water_plants);
-        mGroceryList = findViewById(R.id.grocery_list);
-        mBikeTodayText = (TextView) findViewById(R.id.can_bike);
         mStockText = (TextView) findViewById(R.id.stock_text);
         mMoodText = (TextView) findViewById(R.id.mood_text);
         mXKCDImage = (ImageView) findViewById(R.id.xkcd_image);
@@ -205,19 +194,20 @@ public class MirrorActivity extends ActionBarActivity {
     }
 
     private void setViewState() {
-        String birthday = BirthdayModule.getBirthday();
-        if (TextUtils.isEmpty(birthday)) {
+        List<String> birthdays = BirthdayModule.getBirthday(this);
+        if (birthdays.isEmpty()) {
             mBirthdayText.setVisibility(View.GONE);
         } else {
             mBirthdayText.setVisibility(View.VISIBLE);
-            mBirthdayText.setText(getString(R.string.happy_birthday, birthday));
+            mBirthdayText.setSelected(true);
+
+            String bdayString = birthdays.get(0);
+            for(int i = 1; i<birthdays.size(); i++) {
+                bdayString += ","+birthdays.get(i);
+            }
+            mBirthdayText.setText(getString(R.string.happy_birthday, bdayString));
         }
-
         mDayText.setText(DayModule.getDay());
-//        mHelloText.setText(TimeModule.getTimeOfDayWelcome(getResources())); // not in current design
-
-        mWaterPlants.setVisibility(ChoresModule.waterPlantsToday() ? View.VISIBLE : View.GONE);
-        mGroceryList.setVisibility(ChoresModule.makeGroceryListToday() ? View.VISIBLE : View.GONE);
 
         ForecastModule.getHourlyForecast(getResources(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
 
@@ -256,7 +246,6 @@ public class MirrorActivity extends ActionBarActivity {
 
     private void showDemoMode() {
         if (DEMO_MODE) {
-            mBikeTodayText.setVisibility(View.VISIBLE);
             mStockText.setVisibility(View.VISIBLE);
             mWaterPlants.setVisibility(View.VISIBLE);
             mGroceryList.setVisibility(View.VISIBLE);

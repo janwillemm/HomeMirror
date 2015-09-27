@@ -1,8 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:marquee="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="right"
+    android:gravity="left"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -11,9 +12,12 @@
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="60sp"
+        android:textSize="30sp"
         android:visibility="gone"
-        tools:text="Happy Birthday Andy!" />
+        tools:text="Happy Birthday Andy!"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"/>
 
     <TextView
         android:id="@+id/day_text"
@@ -22,7 +26,7 @@
         android:layout_height="wrap_content"
         tools:text="Sunday the 22nd" />
 
-    <TextClock
+    <DigitalClock
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,55 +83,24 @@
         android:gravity="right"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/hello_text"
-            style="@style/MirrorListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            tools:text="Good morning, Andy and Hannah" />
 
-        <TextView
-            android:id="@+id/can_bike"
-            style="@style/MirrorListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/bike"
-            android:visibility="gone"
-            tools:text="Don't Bike Today"
-            tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/water_plants"
-            style="@style/MirrorListText"
+        <asia.ivity.android.marqueeview.MarqueeView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/air_plant"
-            android:text="@string/water_plants"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-        <TextView
-            android:id="@+id/grocery_list"
-            style="@style/MirrorListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/grocery_bag"
-            android:text="@string/grocery_list"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-        <TextView
-            android:id="@+id/news_headline"
-            style="@style/MirrorListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            tools:text="A news headline"
-            tools:visiblity="visible"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"/>
+            marquee:speed="2"
+            marquee:autoStart="true"
+            >
+            <TextView
+                android:id="@+id/news_headline"
+                style="@style/MirrorListText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                tools:text="A news headline"
+                tools:visiblity="visible"
+                android:ellipsize="none"
+                android:singleLine="true" />
+        </asia.ivity.android.marqueeview.MarqueeView>
 
         <TextView
             android:id="@+id/stock_text"

@@ -23,7 +23,6 @@ public class ForecastModule {
     public interface ForecastListener {
         void onWeatherToday(String weatherToday);
 
-        void onShouldBike(boolean showToday, boolean shouldBike);
     }
 
     public static void getHourlyForecast(final Resources resources, final String lat, final String lon, final ForecastListener listener) {
@@ -54,11 +53,6 @@ public class ForecastModule {
                         listener.onWeatherToday(forecastResponse.currently.getDisplayTemperature() + " " + forecastResponse.currently.summary);
                     }
 
-                    if (WeekUtil.isWeekday() && !WeekUtil.afterFive() && forecastResponse.hourly != null && forecastResponse.hourly.data != null) {
-                        listener.onShouldBike(true, shouldBikeToday(forecastResponse.hourly.data));
-                    } else {
-                        listener.onShouldBike(false, true);
-                    }
                 }
             }
 

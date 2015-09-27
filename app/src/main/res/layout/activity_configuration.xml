@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin"
+    android:background="#2196F3"
     tools:context=".ConfigurationActivity">
 
     <TextView
@@ -39,7 +40,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#2196F3"
+        >
 
         <CheckBox
             android:id="@+id/xkcd_checkbox"
@@ -65,7 +68,9 @@
         android:id="@+id/location_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#2196F3"
+        >
 
         <TextView
             style="@style/ConfigurationItemText"
