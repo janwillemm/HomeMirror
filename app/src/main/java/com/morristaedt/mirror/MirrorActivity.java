@@ -19,6 +19,7 @@ import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.BirthdayModule;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
+import com.morristaedt.mirror.modules.DimModule;
 import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.MoodModule;
 import com.morristaedt.mirror.modules.NewsModule;
@@ -49,6 +50,8 @@ public class MirrorActivity extends ActionBarActivity {
     private View mGroceryList;
     private ImageView mXKCDImage;
     private MoodModule mMoodModule;
+    private DimModule mDimModule;
+
     private TextView mNewsHeadline;
     private TextView mCalendarTitleText;
     private TextView mCalendarDetailsText;
@@ -110,6 +113,16 @@ public class MirrorActivity extends ActionBarActivity {
                     mMoodText.setText(affirmation);
                 }
             });
+        }
+    };
+
+    private DimModule.DimListener mDimListener = new DimModule.DimListener() {
+        @Override
+        public void onDim(float brightnessValue) {
+            WindowManager.LayoutParams layout = getWindow().getAttributes();
+            layout.screenBrightness = brightnessValue;
+            getWindow().setAttributes(layout);
+
         }
     };
 
@@ -179,12 +192,19 @@ public class MirrorActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onResume()   {
+        super.onResume();
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
 
         if (mMoodModule != null) {
             mMoodModule.release();
         }
+
     }
 
     @Override
@@ -242,6 +262,11 @@ public class MirrorActivity extends ActionBarActivity {
         } else {
             mMoodText.setVisibility(View.GONE);
         }
+
+        mDimModule = new DimModule();
+        mDimModule.getScreenBrightness(mDimListener);
+
+
     }
 
     private void showDemoMode() {
