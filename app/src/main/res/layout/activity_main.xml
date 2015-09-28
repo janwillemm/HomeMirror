@@ -7,17 +7,23 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/birthday_text"
-        style="@style/MirrorText"
+
+    <com.morristaedt.mirror.MarqueeView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:visibility="gone"
-        tools:text="Happy Birthday Andy!"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:marqueeRepeatLimit="marquee_forever"/>
+        marquee:speed="6"
+        marquee:autoStart="true">
+        <TextView
+            android:id="@+id/birthday_text"
+            style="@style/MirrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:visibility="gone"
+            tools:text="Happy Birthday Andy!"
+            android:singleLine="true"
+            android:ellipsize="none"/>
+    </com.morristaedt.mirror.MarqueeView>
 
     <TextView
         android:id="@+id/day_text"
@@ -76,31 +82,32 @@
         android:layout_marginTop="60dp"
         android:visibility="gone" />
 
+    <com.morristaedt.mirror.MarqueeView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        marquee:speed="6"
+        marquee:autoStart="true"
+        >
+        <TextView
+            android:id="@+id/news_headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="A news headline"
+            tools:visiblity="visible"
+            android:ellipsize="marquee"
+            android:layout_gravity="fill"
+            android:text="HELE LANGE TEKST LALALALALLALALALALLALALALALLALALALALBLAAT GLLGDSL LALALALAL LALALALAL LALALALAL LDFSDLFDSF MDFJNSD RIK IS BAAS LOLOLOLOLOLOLOLOLOOO"
+            android:singleLine="true" />
+    </com.morristaedt.mirror.MarqueeView>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:gravity="right"
         android:orientation="vertical">
 
 
 
-        <asia.ivity.android.marqueeview.MarqueeView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            marquee:speed="2"
-            marquee:autoStart="true"
-            >
-            <TextView
-                android:id="@+id/news_headline"
-                style="@style/MirrorListText"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                tools:text="A news headline"
-                tools:visiblity="visible"
-                android:ellipsize="none"
-                android:singleLine="true" />
-        </asia.ivity.android.marqueeview.MarqueeView>
 
         <TextView
             android:id="@+id/stock_text"
