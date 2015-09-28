@@ -34,23 +34,24 @@ public class XKCDModule {
             protected XKCDResponse doInBackground(Void... params) {
                 RestAdapter restAdapter = new RestAdapter.Builder()
                         .setEndpoint("http://xkcd.com")
-                        .setErrorHandler(new ErrorHandler() {
-                            @Override
-                            public Throwable handleError(RetrofitError cause) {
-                                Log.w("mirror", "XKCD error: " + cause);
-                                return null;
-                            }
-                        })
                         .build();
 
                 XKCDRequest service = restAdapter.create(XKCDRequest.class);
-                return service.getLatestXKCD();
+                XKCDResponse response = null;
+                try {
+                    response = service.getLatestXKCD();
+                }
+                catch(RetrofitError error)  {
+                    Log.w("mirror", "XKCD error: " + error);
+
+                }
+                return response;
             }
 
             @Override
             protected void onPostExecute(XKCDResponse xkcdResponse) {
                 Calendar today = Calendar.getInstance();
-                if (!TextUtils.isEmpty(xkcdResponse.img) && xkcdResponse.day == today.get(Calendar.DAY_OF_MONTH) && xkcdResponse.month == (today.get(Calendar.MONTH) + 1) && xkcdResponse.year == today.get(Calendar.YEAR)) {
+                if (xkcdResponse != null && !TextUtils.isEmpty(xkcdResponse.img) && xkcdResponse.day == today.get(Calendar.DAY_OF_MONTH) && xkcdResponse.month == (today.get(Calendar.MONTH) + 1) && xkcdResponse.year == today.get(Calendar.YEAR)) {
                     listener.onNewXKCDToday(xkcdResponse.img);
                 } else {
                     listener.onNewXKCDToday(null);
