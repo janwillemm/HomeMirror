@@ -37,7 +37,7 @@ public class NewsModule {
                     for(int i = 1; i < items.size();    i++)    {
                         stringOfItems += " | "+items.get(i).getTitle();
                     }
-                    System.out.println(stringOfItems);
+                    System.out.println(stringOfItems+"\n");
                     return stringOfItems;
                 } catch (RSSReaderException e) {
                     Log.e("NewsModule", "Error parsing RSS");

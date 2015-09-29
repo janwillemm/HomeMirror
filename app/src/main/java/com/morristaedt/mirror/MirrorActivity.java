@@ -19,6 +19,7 @@ import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.BirthdayModule;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
+import com.morristaedt.mirror.modules.DimModule;
 import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.MoodModule;
 import com.morristaedt.mirror.modules.NewsModule;
@@ -52,6 +53,8 @@ public class MirrorActivity extends ActionBarActivity {
     private View mGroceryList;
     private ImageView mXKCDImage;
     private MoodModule mMoodModule;
+    private DimModule mDimModule;
+
     private TextView mNewsHeadline;
     private TextView mCalendarTitleText;
     private TextView mCalendarDetailsText;
@@ -114,6 +117,21 @@ public class MirrorActivity extends ActionBarActivity {
                     mMoodText.setText(affirmation);
                 }
             });
+        }
+    };
+
+    private DimModule.DimListener mDimListener = new DimModule.DimListener() {
+        @Override
+        public void onDim(int brightnessValue) {
+            android.provider.Settings.System.putInt(getContentResolver(),
+                    android.provider.Settings.System.SCREEN_BRIGHTNESS,
+                    brightnessValue);
+            // Apply brightness by creating a dummy activity
+            Intent intent = new Intent(getBaseContext(), DimModule.DummyBrightnessActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("brightness value", brightnessValue/255.0f);
+            getApplication().startActivity(intent);
+
         }
     };
 
@@ -195,6 +213,11 @@ public class MirrorActivity extends ActionBarActivity {
             mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
         }
 
+    }
+
+    @Override
+    protected void onResume()   {
+        super.onResume();
         setViewState();
     }
 
@@ -205,6 +228,7 @@ public class MirrorActivity extends ActionBarActivity {
         if (mMoodModule != null) {
             mMoodModule.release();
         }
+
     }
 
     @Override
@@ -252,7 +276,7 @@ public class MirrorActivity extends ActionBarActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        if (mConfigSettings.showStock() && WeekUtil.isWeekday() && DayUtil.afterFive()) {
+        if (mConfigSettings.showStock() && WeekUtil.isWeekday() && WeekUtil.afterFive()) {
             YahooFinanceModule.getStockForToday(mConfigSettings.getStockTickerSymbol(), mStockListener);
         } else {
             mStockText.setVisibility(View.GONE);
@@ -265,6 +289,11 @@ public class MirrorActivity extends ActionBarActivity {
 
             mMoodText.setVisibility(View.GONE);
         }
+
+        mDimModule = new DimModule();
+        mDimModule.getScreenBrightness(mDimListener);
+
+
     }
 
     private void showDemoMode() {

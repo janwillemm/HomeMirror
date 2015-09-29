@@ -7,17 +7,23 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/birthday_text"
-        style="@style/MirrorText"
+
+    <com.morristaedt.mirror.MarqueeView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:visibility="gone"
-        tools:text="Happy Birthday Andy!"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:marqueeRepeatLimit="marquee_forever"/>
+        marquee:speed="9"
+        marquee:autoStart="true">
+        <TextView
+            android:id="@+id/birthday_text"
+            style="@style/MirrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:visibility="gone"
+            tools:text="Happy Birthday Andy!"
+            android:singleLine="true"
+            android:ellipsize="none"/>
+    </com.morristaedt.mirror.MarqueeView>
 
     <TextView
         android:id="@+id/day_text"
@@ -45,31 +51,43 @@
         android:layout_height="wrap_content"
         tools:text="Partly Cloudy" />
 
-    <TextView
-        android:id="@+id/calendar_title"
-        style="@style/MirrorText"
-        android:includeFontPadding="false"
-        android:layout_marginTop="60dp"
-        android:layout_width="match_parent"
+    <com.morristaedt.mirror.MarqueeView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        tools:text="Very important meeting"/>
+        marquee:speed="5"
+        marquee:autoStart="true">
+        <TextView
+            android:id="@+id/calendar_title"
+            style="@style/MirrorText"
+            android:includeFontPadding="false"
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:text="Very important meeting"/>
+    </com.morristaedt.mirror.MarqueeView>
 
-    <TextView
-        android:id="@+id/calendar_details"
-        style="@style/MirrorText"
-        android:includeFontPadding="false"
-        android:textSize="40dp"
-        android:layout_width="match_parent"
+    <com.morristaedt.mirror.MarqueeView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        tools:text="11:00-12:00 ~ 10 Downing Street"/>
+        marquee:speed="5"
+        marquee:autoStart="true">
+        <TextView
+            android:id="@+id/calendar_details"
+            style="@style/MirrorText"
+            android:includeFontPadding="false"
+            android:textSize="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:text="11:00-12:00 ~ 10 Downing Street"/>
+    </com.morristaedt.mirror.MarqueeView>
 
     <ImageView
         android:id="@+id/xkcd_image"
@@ -78,31 +96,32 @@
         android:layout_marginTop="60dp"
         android:visibility="gone" />
 
+    <com.morristaedt.mirror.MarqueeView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        marquee:speed="9"
+        marquee:autoStart="true"
+        >
+        <TextView
+            android:id="@+id/news_headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="A news headline"
+            tools:visiblity="visible"
+            android:ellipsize="marquee"
+            android:layout_gravity="fill"
+            android:text="Bezig met laden van nieuws"
+            android:singleLine="true" />
+    </com.morristaedt.mirror.MarqueeView>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:gravity="right"
         android:orientation="vertical">
 
 
 
-        <asia.ivity.android.marqueeview.MarqueeView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            marquee:speed="2"
-            marquee:autoStart="true"
-            >
-            <TextView
-                android:id="@+id/news_headline"
-                style="@style/MirrorListText"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                tools:text="A news headline"
-                tools:visiblity="visible"
-                android:ellipsize="none"
-                android:singleLine="true" />
-        </asia.ivity.android.marqueeview.MarqueeView>
 
         <TextView
             android:id="@+id/transit_text"
