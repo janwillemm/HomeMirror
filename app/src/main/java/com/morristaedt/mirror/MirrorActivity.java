@@ -118,10 +118,15 @@ public class MirrorActivity extends ActionBarActivity {
 
     private DimModule.DimListener mDimListener = new DimModule.DimListener() {
         @Override
-        public void onDim(float brightnessValue) {
-            WindowManager.LayoutParams layout = getWindow().getAttributes();
-            layout.screenBrightness = brightnessValue;
-            getWindow().setAttributes(layout);
+        public void onDim(int brightnessValue) {
+            android.provider.Settings.System.putInt(getContentResolver(),
+                    android.provider.Settings.System.SCREEN_BRIGHTNESS,
+                    brightnessValue);
+            // Apply brightness by creating a dummy activity
+            Intent intent = new Intent(getBaseContext(), DimModule.DummyBrightnessActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("brightness value", brightnessValue/255.0f);
+            getApplication().startActivity(intent);
 
         }
     };
@@ -188,13 +193,12 @@ public class MirrorActivity extends ActionBarActivity {
             mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
         }
 
-        setViewState();
     }
 
     @Override
     protected void onResume()   {
         super.onResume();
-
+        setViewState();
     }
 
     @Override
