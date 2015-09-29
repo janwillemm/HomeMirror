@@ -12,11 +12,10 @@ import java.util.Locale;
  */
 public class DayModule {
 
-    public static Spanned getDay() {
-        SimpleDateFormat formatDayOfMonth = new SimpleDateFormat("EEEE", new Locale("nl"));
+    public static String getDay() {
+        SimpleDateFormat formatDayOfMonth = new SimpleDateFormat("EEE d MMMM", new Locale("nl"));
         Calendar now = Calendar.getInstance();
-        int dayOfMonth = now.get(Calendar.DAY_OF_MONTH);
-        return Html.fromHtml(formatDayOfMonth.format(now.getTime()) + " de " + dayOfMonth + "<sup><small>e</small></sup>");
+        return formatDayOfMonth.format(now.getTime());
     }
 
 }
