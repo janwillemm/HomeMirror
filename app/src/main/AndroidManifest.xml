@@ -45,6 +45,10 @@
             android:launchMode="singleInstance"
             />
 
+        <activity
+            android:name=".modules.DimModule$DummyBrightnessActivity"
+            />
+
         <receiver android:name=".receiver.AlarmReceiver" />
     </application>
 

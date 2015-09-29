@@ -23,6 +23,7 @@ public class DimModule  {
 
         private Handler handler;
 
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -60,7 +61,7 @@ public class DimModule  {
         Calendar now = Calendar.getInstance();
         int hour = now.get(Calendar.HOUR_OF_DAY);
         if(hour > 22 || hour < 7) {
-            listener.onDim(50);
+            listener.onDim(10);
         }
         else
         {
