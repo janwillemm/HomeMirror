@@ -8,12 +8,22 @@ import java.util.Calendar;
 public class WeekUtil {
 
     public static boolean isWeekday() {
-        int dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        return dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY;
+        return getCurrentDay() != Calendar.SATURDAY && getCurrentDay() != Calendar.SUNDAY;
     }
 
-    public static boolean afterFive(){
-        int hourOfDay = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        return hourOfDay >= 17;
+    public static boolean isMonday(){
+        return getCurrentDay() == Calendar.MONDAY;
+    }
+
+    public static boolean isFriday(){
+        return getCurrentDay() == Calendar.FRIDAY;
+    }
+
+    private static int getCurrentDay(){
+        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+    }
+
+    private static int getCurrentHour(){
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
     }
 }

@@ -26,6 +26,7 @@ import com.morristaedt.mirror.modules.XKCDModule;
 import com.morristaedt.mirror.modules.YahooFinanceModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
 import com.morristaedt.mirror.requests.YahooStockResponse;
+import com.morristaedt.mirror.utils.DayUtil;
 import com.morristaedt.mirror.utils.WeekUtil;
 import com.squareup.picasso.Picasso;
 
@@ -230,7 +231,7 @@ public class MirrorActivity extends ActionBarActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        if (mConfigSettings.showStock() && WeekUtil.isWeekday() && WeekUtil.afterFive()) {
+        if (mConfigSettings.showStock() && WeekUtil.isWeekday() && DayUtil.afterFive()) {
             YahooFinanceModule.getStockForToday(mConfigSettings.getStockTickerSymbol(), mStockListener);
         } else {
             mStockText.setVisibility(View.GONE);
