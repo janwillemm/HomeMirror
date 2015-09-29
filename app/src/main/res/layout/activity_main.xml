@@ -11,7 +11,7 @@
     <com.morristaedt.mirror.MarqueeView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        marquee:speed="6"
+        marquee:speed="9"
         marquee:autoStart="true">
         <TextView
             android:id="@+id/birthday_text"
@@ -49,31 +49,43 @@
         android:layout_height="wrap_content"
         tools:text="Partly Cloudy" />
 
-    <TextView
-        android:id="@+id/calendar_title"
-        style="@style/MirrorText"
-        android:includeFontPadding="false"
-        android:layout_marginTop="60dp"
-        android:layout_width="match_parent"
+    <com.morristaedt.mirror.MarqueeView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        tools:text="Very important meeting"/>
+        marquee:speed="5"
+        marquee:autoStart="true">
+        <TextView
+            android:id="@+id/calendar_title"
+            style="@style/MirrorText"
+            android:includeFontPadding="false"
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:text="Very important meeting"/>
+    </com.morristaedt.mirror.MarqueeView>
 
-    <TextView
-        android:id="@+id/calendar_details"
-        style="@style/MirrorText"
-        android:includeFontPadding="false"
-        android:textSize="40dp"
-        android:layout_width="match_parent"
+    <com.morristaedt.mirror.MarqueeView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        tools:text="11:00-12:00 ~ 10 Downing Street"/>
+        marquee:speed="5"
+        marquee:autoStart="true">
+        <TextView
+            android:id="@+id/calendar_details"
+            style="@style/MirrorText"
+            android:includeFontPadding="false"
+            android:textSize="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:text="11:00-12:00 ~ 10 Downing Street"/>
+    </com.morristaedt.mirror.MarqueeView>
 
     <ImageView
         android:id="@+id/xkcd_image"
@@ -85,7 +97,7 @@
     <com.morristaedt.mirror.MarqueeView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        marquee:speed="6"
+        marquee:speed="9"
         marquee:autoStart="true"
         >
         <TextView
@@ -96,7 +108,7 @@
             tools:visiblity="visible"
             android:ellipsize="marquee"
             android:layout_gravity="fill"
-            android:text="HELE LANGE TEKST LALALALALLALALALALLALALALALLALALALALBLAAT GLLGDSL LALALALAL LALALALAL LALALALAL LDFSDLFDSF MDFJNSD RIK IS BAAS LOLOLOLOLOLOLOLOLOOO"
+            android:text="Bezig met laden van nieuws"
             android:singleLine="true" />
     </com.morristaedt.mirror.MarqueeView>
 
