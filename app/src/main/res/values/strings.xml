@@ -42,5 +42,12 @@
     <string name="show_headline">Show BBC headline</string>
     <string name="found_location">Found location</string>
 
+    <!-- Public transit destination ID's -->
+    <string name="locatie_pijnacker_station">place_id:ChIJP-bFryvKxUcRnTi_cy-VqF4</string>
+    <string name="locatie_delft_station">place_id:ChIJL6CMwsC1xUcR15DMzPjqmMA</string>
+    <string name="locatie_erasmus">place_id:ChIJD35gUCAzxEcRXH3FlUb4t-A</string>
+    <string name="locatie_magnetme">place_id:ChIJ1RdgPkUzxEcRZQToVPvDFQM</string>
+    <string name="locatie_rtmmedia">place_id:ChIJxaKBE3QzxEcRTgHYPNTJeuM</string>
+
 
 </resources>

@@ -105,6 +105,16 @@
         </asia.ivity.android.marqueeview.MarqueeView>
 
         <TextView
+            android:id="@+id/transit_text"
+            style="@style/MirrorListText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/f_train"
+            android:visibility="gone"
+            tools:text="Train leaves by: "
+            tools:visibility="visible"
+            />
+        <TextView
             android:id="@+id/stock_text"
             style="@style/MirrorListText"
             android:layout_width="match_parent"

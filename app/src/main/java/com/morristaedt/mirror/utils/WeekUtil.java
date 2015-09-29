@@ -15,6 +15,10 @@ public class WeekUtil {
         return getCurrentDay() == Calendar.MONDAY;
     }
 
+    public static boolean isWorkDay(){
+        return getCurrentDay() == Calendar.WEDNESDAY || getCurrentDay() == Calendar.THURSDAY;
+    }
+
     public static boolean isFriday(){
         return getCurrentDay() == Calendar.FRIDAY;
     }

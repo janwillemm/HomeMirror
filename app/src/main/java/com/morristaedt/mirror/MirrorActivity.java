@@ -22,6 +22,8 @@ import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.MoodModule;
 import com.morristaedt.mirror.modules.NewsModule;
+import com.morristaedt.mirror.modules.PublicTransitModule;
+import com.morristaedt.mirror.modules.TrainScheduleModule;
 import com.morristaedt.mirror.modules.XKCDModule;
 import com.morristaedt.mirror.modules.YahooFinanceModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
@@ -53,6 +55,7 @@ public class MirrorActivity extends ActionBarActivity {
     private TextView mNewsHeadline;
     private TextView mCalendarTitleText;
     private TextView mCalendarDetailsText;
+    private TextView mPublicTransitText;
 
     private XKCDModule.XKCDListener mXKCDListener = new XKCDModule.XKCDListener() {
         @Override
@@ -114,6 +117,21 @@ public class MirrorActivity extends ActionBarActivity {
         }
     };
 
+    private PublicTransitModule.PublicTransitListener mPublicTransitListener = new PublicTransitModule.PublicTransitListener() {
+        @Override
+        public void onTransitUpdate(String delft, String pijnacker) {
+            System.out.println(delft);
+            if(TextUtils.isEmpty(delft)){
+
+                mPublicTransitText.setVisibility(View.GONE);
+            }
+            else {
+                mPublicTransitText.setVisibility(View.VISIBLE);
+                mPublicTransitText.setText("Delft: " + delft + "\nPijnacker: " + pijnacker);
+            }
+        }
+    };
+
     private CalendarModule.CalendarListener mCalendarListener = new CalendarModule.CalendarListener() {
         @Override
         public void onCalendarUpdate(String title, String details) {
@@ -163,6 +181,7 @@ public class MirrorActivity extends ActionBarActivity {
         mNewsHeadline = (TextView) findViewById(R.id.news_headline);
         mCalendarTitleText = (TextView) findViewById(R.id.calendar_title);
         mCalendarDetailsText = (TextView) findViewById(R.id.calendar_details);
+        mPublicTransitText = (TextView) findViewById(R.id.transit_text);
 
         if (mConfigSettings.invertXKCD()) {
             //Negative of XKCD image
@@ -212,6 +231,8 @@ public class MirrorActivity extends ActionBarActivity {
 
         ForecastModule.getHourlyForecast(getResources(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
 
+        PublicTransitModule.getTrainTimes(getResources(), mPublicTransitListener);
+
         if (mConfigSettings.showNewsHeadline()) {
             NewsModule.getNewsHeadline(mNewsListener);
         } else {
@@ -241,6 +262,7 @@ public class MirrorActivity extends ActionBarActivity {
             mMoodModule = new MoodModule(new WeakReference<Context>(this));
             mMoodModule.getCurrentMood(mMoodListener);
         } else {
+
             mMoodText.setVisibility(View.GONE);
         }
     }
