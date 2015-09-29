@@ -17,7 +17,7 @@ public class DimModule  {
     public interface DimListener {
         void onDim(int brightnessValue);
     }
-    public class DummyBrightnessActivity extends Activity {
+    public static class DummyBrightnessActivity extends Activity {
 
         private static final int DELAYED_MESSAGE = 1;
 

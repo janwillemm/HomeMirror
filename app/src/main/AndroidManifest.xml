@@ -37,6 +37,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".modules.DimModule$DummyBrightnessActivity"
+            ></activity>
+
         <activity
             android:name=".MirrorActivity"
             android:launchMode="singleInstance"
