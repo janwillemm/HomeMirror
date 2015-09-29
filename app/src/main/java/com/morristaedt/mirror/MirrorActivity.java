@@ -6,6 +6,7 @@ import android.graphics.ColorFilter;
 import android.graphics.ColorMatrixColorFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -119,14 +120,23 @@ public class MirrorActivity extends ActionBarActivity {
     private DimModule.DimListener mDimListener = new DimModule.DimListener() {
         @Override
         public void onDim(int brightnessValue) {
-            android.provider.Settings.System.putInt(getContentResolver(),
-                    android.provider.Settings.System.SCREEN_BRIGHTNESS,
-                    brightnessValue);
-            // Apply brightness by creating a dummy activity
-            Intent intent = new Intent(getBaseContext(), DimModule.DummyBrightnessActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("brightness value", brightnessValue/255.0f);
-            getApplication().startActivity(intent);
+            int curBrightness = 0;
+            try {
+                curBrightness = android.provider.Settings.System.getInt(getContentResolver(), android.provider.Settings.System.SCREEN_BRIGHTNESS);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            if(curBrightness != brightnessValue) {
+                android.provider.Settings.System.putInt(getContentResolver(),
+                        android.provider.Settings.System.SCREEN_BRIGHTNESS,
+                        brightnessValue);
+
+                // Apply brightness by creating a dummy activity
+                Intent intent = new Intent(getBaseContext(), DimModule.DummyBrightnessActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("brightness value", brightnessValue / 255.0f);
+                getApplication().startActivity(intent);
+            }
 
         }
     };

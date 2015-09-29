@@ -17,11 +17,12 @@ public class DimModule  {
     public interface DimListener {
         void onDim(int brightnessValue);
     }
-    public class DummyBrightnessActivity extends Activity {
+    public static class DummyBrightnessActivity extends Activity {
 
         private static final int DELAYED_MESSAGE = 1;
 
         private Handler handler;
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class DimModule  {
         Calendar now = Calendar.getInstance();
         int hour = now.get(Calendar.HOUR_OF_DAY);
         if(hour > 22 || hour < 7) {
-            listener.onDim(50);
+            listener.onDim(10);
         }
         else
         {
